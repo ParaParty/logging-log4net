@@ -240,7 +240,17 @@ namespace log4net.Util
 								offset++;
 							}
 						}
-						// Look for the maximum length
+                        // Look for the trunc flag
+                        if (offset < pattern.Length)
+                        {
+                            if (pattern[offset] == '-')
+                            {
+                                // Seen align flag
+                                formattingInfo.TruncEnd = true;
+                                offset++;
+                            }
+                        }
+                        // Look for the maximum length
 						while (offset < pattern.Length && char.IsDigit(pattern[offset]))
 						{
 							// Seen digit

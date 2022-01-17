@@ -88,13 +88,14 @@ namespace log4net.Util
 		/// </remarks>
 		public virtual FormattingInfo FormattingInfo
 		{
-			get { return new FormattingInfo(m_min, m_max, m_leftAlign); }
+			get { return new FormattingInfo(m_min, m_max, m_leftAlign, m_truncEnd); }
 			set
 			{
 				m_min = value.Min;
 				m_max = value.Max;
 				m_leftAlign = value.LeftAlign;
-			}
+                m_truncEnd = value.TruncEnd;
+            }
 		}
 
 		/// <summary>
@@ -186,7 +187,12 @@ namespace log4net.Util
                     len = buf.Length;
                     if (len > m_max)
                     {
-                        msg = buf.ToString(len - m_max, m_max);
+                        if (m_truncEnd)
+                        {
+                            msg = buf.ToString(0, m_max);
+                        } else {
+                            msg = buf.ToString(len - m_max, m_max);
+                        }
                         len = m_max;
                     }
                     else
@@ -254,6 +260,7 @@ namespace log4net.Util
 		private int m_min = -1;
 		private int m_max = int.MaxValue;
 		private bool m_leftAlign = false;
+		private bool m_truncEnd = false;
 
 		/// <summary>
 		/// The option string to the converter

@@ -66,6 +66,23 @@ namespace log4net.Util
 			m_max = max;
 			m_leftAlign = leftAlign;
 		}
+        
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// Initializes a new instance of the <see cref="FormattingInfo" /> class
+		/// with the specified parameters.
+		/// </para>
+		/// </remarks>
+		public FormattingInfo(int min, int max, bool leftAlign, bool truncEnd) 
+		{
+			m_min = min;
+			m_max = max;
+			m_leftAlign = leftAlign;
+            m_truncEnd = truncEnd;
+        }
 
 		#endregion Public Instance Constructors
 
@@ -122,14 +139,32 @@ namespace log4net.Util
 			get { return m_leftAlign; }
 			set { m_leftAlign = value; }
 		}
+        
+        /// <summary>
+        /// Gets or sets a flag indicating whether trunc beginning or end
+        /// </summary>
+        /// <value>
+        /// A flag indicating whether trunc beginning or end
+        /// </value>
+        /// <remarks>
+        /// <para>
+        /// Gets or sets a flag indicating whether trunc beginning or end
+        /// </para>
+        /// </remarks>
+        public bool TruncEnd
+        {
+            get { return m_truncEnd; }
+            set { m_truncEnd = value; }
+        }
 
-		#endregion Public Instance Properties
+        #endregion Public Instance Properties
 
 		#region Private Instance Fields
 
 		private int m_min = -1;
 		private int m_max = int.MaxValue;
 		private bool m_leftAlign = false;
+		private bool m_truncEnd = false;
 
 		#endregion Private Instance Fields
 	}
