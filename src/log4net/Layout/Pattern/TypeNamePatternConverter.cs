@@ -52,13 +52,8 @@ namespace log4net.Layout.Pattern
 			{
 				return string.Empty;
 			}
-			
-			if (loggingEvent.LocationInformation == null)
-			{
-				return string.Empty;
-			}
-			
-			return loggingEvent.LocationInformation.ClassName;
+
+			return loggingEvent.LoggerName;
 		}
 	}
 }
