@@ -50,7 +50,14 @@ namespace log4net.Layout.Pattern
 		/// </remarks>
 		protected override void Convert(TextWriter writer, LoggingEvent loggingEvent)
 		{
-			writer.Write(loggingEvent.LocationInformation.LineNumber);
+            if (loggingEvent.LocationInformation.ClassName != loggingEvent.LoggerName)
+            {
+                writer.Write("?");
+            }
+            else
+            {
+                writer.Write(loggingEvent.LocationInformation.LineNumber);
+            }
 		}
 	}
 }
